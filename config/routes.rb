@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   resources :users
   resources :sessions
+  resources :movies
 
   post 'signin', to: 'sessions#create'
 
