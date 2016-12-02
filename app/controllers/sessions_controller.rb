@@ -2,9 +2,8 @@ class SessionsController < ApplicationController
   skip_before_action :authenticate_user, only: [:create]
 
   def create
-    byebug
-      user = User.find_by(name: params[:name])
-      if user.authenticate(params[:password])
+      user = User.find_by(name: params[:user][:name])
+      if user.authenticate(params[:user][:password])
         jwt = Auth.issue({user_id: user.id})
         render json: {jwt: jwt}
       end
