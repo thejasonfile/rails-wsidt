@@ -7,6 +7,7 @@ class RestaurantsController < ApplicationController
 
   def create
     byebug
+    YelpApi.search(zipcode)
   end
 
 end
