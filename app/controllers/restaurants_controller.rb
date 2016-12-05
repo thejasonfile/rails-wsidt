@@ -6,8 +6,9 @@ class RestaurantsController < ApplicationController
   end
 
   def create
-    byebug
-    YelpApi.search(zipcode)
+    user_id = Auth.decode(params["data"]["jwt"])[0]["user_id"]
+    YelpApi.search(params["data"]["zipcode"], user_id)
+    render json: {restaurants: Restaurant.all, user_id: user_id}
   end
 
 end
