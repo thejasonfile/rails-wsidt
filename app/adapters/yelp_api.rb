@@ -9,11 +9,14 @@ class YelpApi
       })
   end
 
-  def self.search(zipcode, user_id)
-    # Restaurant.where(user_id: user_id).destroy_all
+  def self.search(zipcode)
     results = client.search(zipcode)
     results.businesses.map do |result|
-      Restaurant.find_or_create_by({name: result.name, rating: result.rating, address: result.location.address.join(", "), city: result.location.city, zipcode: result.location.postal_code, url: result.url, user_id: user_id})
+      if !Restaurant.find_by({yelp_id: result.id})
+        Restaurant.create({yelp_id: result.id, name: result.name, rating: result.rating, address: result.location.address.join(", "), city: result.location.city, zipcode: result.location.postal_code, phone: result.display_phone, url: result.url})
+      else
+        Restaurant.find_by({yelp_id: result.id})
+      end
     end
   end
 
