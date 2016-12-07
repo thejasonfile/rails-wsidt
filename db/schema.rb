@@ -10,23 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161207144041) do
+ActiveRecord::Schema.define(version: 20161206215310) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "favorites", force: :cascade do |t|
-    t.string   "category"
     t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.integer  "rating"
-    t.text     "notes"
-  end
-
-  create_table "favorites_restaurants", id: false, force: :cascade do |t|
-    t.integer "favorite_id",   null: false
-    t.integer "restaurant_id", null: false
+    t.text     "note"
+    t.integer  "favoritable_id"
+    t.string   "favoritable_type"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.index ["favoritable_type", "favoritable_id"], name: "index_favorites_on_favoritable_type_and_favoritable_id", using: :btree
   end
 
   create_table "restaurants", force: :cascade do |t|
