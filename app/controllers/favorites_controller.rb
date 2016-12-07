@@ -1,4 +1,5 @@
 class FavoritesController < ApplicationController
+  before_action :authenticate_user
 
   def create
     user_id = Auth.decode(params["user"]["jwt"])[0]["user_id"]
@@ -6,7 +7,8 @@ class FavoritesController < ApplicationController
   end
 
   def destroy
-    byebug
+    user_id = Auth.decode(params["user"]["jwt"])[0]["user_id"]
+    Favorite.find_by(user_id: user_id, favoritable: Restaurant.find(params["restaurant"]["id"])).destroy
   end
 
 end
