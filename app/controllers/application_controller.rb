@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::API
-  before_action :authenticate_user, except: [:new, :create]
+  before_action :authenticate_user, except: [:signed_in?, :current_user]
 
   def authenticate_user
     render json: {error: "Unauthorized User"} unless signed_in?

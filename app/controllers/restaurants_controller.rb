@@ -1,9 +1,5 @@
 class RestaurantsController < ApplicationController
-  skip_before_action :authenticate_user
-
-  def index
-    byebug
-  end
+  before_action :authenticate_user
 
   def create
     user_id = Auth.decode(params["data"]["jwt"])[0]["user_id"]
