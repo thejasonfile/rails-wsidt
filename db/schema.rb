@@ -17,12 +17,12 @@ ActiveRecord::Schema.define(version: 20161206215310) do
 
   create_table "favorites", force: :cascade do |t|
     t.integer  "user_id"
-    t.integer  "rating"
-    t.text     "note"
+    t.integer  "rating",           default: 0
+    t.text     "note",             default: ""
     t.integer  "favoritable_id"
     t.string   "favoritable_type"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
     t.index ["favoritable_type", "favoritable_id"], name: "index_favorites_on_favoritable_type_and_favoritable_id", using: :btree
   end
 

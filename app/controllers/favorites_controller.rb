@@ -16,7 +16,6 @@ class FavoritesController < ApplicationController
   def update
     favorite = Restaurant.find(params[:id]).favorites.find_by(user_id: find_user_id)
     favorite.update(rating: params[:favorite][:rating], note: params[:favorite][:notes])
-    byebug
     render json: {favorite: favorite}
   end
 
