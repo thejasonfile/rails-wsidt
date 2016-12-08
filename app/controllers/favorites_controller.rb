@@ -3,10 +3,10 @@ class FavoritesController < ApplicationController
 
   def index
     all_user_favorites = Favorite.all.where(user_id: find_user_id)
-    favoritables = all_user_favorites.map do |favorite|
-      favorite.favoritable
+    favObject = all_user_favorites.map do |favorite|
+      [favorite, favorite.favoritable]
     end.sort!
-    render json: {favorites: favoritables}
+    render json: {favorites: favObject}
   end
 
   def create
