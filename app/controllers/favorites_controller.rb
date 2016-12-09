@@ -16,7 +16,12 @@ class FavoritesController < ApplicationController
   def update
     favorite = Restaurant.find(params[:id]).favorites.find_by(user_id: find_user_id)
     favorite.update(rating: params[:favorite][:rating], note: params[:favorite][:notes])
-    render json: {favorite: favorite}
+    # render json: {favorite: favorite}
+    all_user_favorites = Favorite.all.where(user_id: find_user_id)
+    favObject = all_user_favorites.map do |favorite|
+      [favorite, favorite.favoritable]
+    end.sort!
+    render json: {favorites: favObject}
   end
 
   def destroy
