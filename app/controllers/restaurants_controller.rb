@@ -3,7 +3,19 @@ class RestaurantsController < ApplicationController
 
   def create
     results = YelpApi.search(params["data"]["zipcode"])
-    render json: {restaurants: results}
+    favorited_results = results.select do |result|
+      result.favorites.where(user_id: find_user_id).length == 1
+    end
+    favorite_ids = favorited_results.map do |result|
+      result.id
+    end
+    render json: {restaurants: results, favorited_ids: favorite_ids}
+  end
+
+  private
+
+  def find_user_id
+    Auth.decode(request.env["HTTP_AUTHORIZATION"])[0]["user_id"]
   end
 
 end
