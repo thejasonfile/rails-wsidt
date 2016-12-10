@@ -2,11 +2,7 @@ class FavoritesController < ApplicationController
   before_action :authenticate_user
 
   def index
-    all_user_favorites = Favorite.all.where(user_id: find_user_id)
-    favObject = all_user_favorites.map do |favorite|
-      [favorite, favorite.favoritable]
-    end.sort!
-    render json: {favorites: favObject}
+    fav_obj
   end
 
   def create
@@ -14,16 +10,25 @@ class FavoritesController < ApplicationController
   end
 
   def update
-    favorite = Restaurant.find(params[:id]).favorites.find_by(user_id: find_user_id)
+    favorite = Favorite.find(params[:id])
     favorite.update(rating: params[:favorite][:rating], note: params[:favorite][:notes])
-    render json: {favorite: favorite}
+    fav_obj
   end
 
   def destroy
-    Favorite.find_by(user_id: find_user_id, favoritable: Restaurant.find(params["restaurant"]["id"])).destroy
+    Favorite.find(params[:id]).destroy
+    fav_obj
   end
 
   private
+
+  def fav_obj
+    all_user_favorites = Favorite.all.where(user_id: find_user_id)
+    favObject = all_user_favorites.map do |favorite|
+      [favorite, favorite.favoritable]
+    end.sort!
+    render json: {favorites: favObject}
+  end
 
   def find_user_id
     Auth.decode(request.env["HTTP_AUTHORIZATION"])[0]["user_id"]
