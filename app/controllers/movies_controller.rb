@@ -1,7 +1,7 @@
 require_relative '../adapters/movie_api'
 
 class MoviesController < ApplicationController
-  skip_before_action :authenticate_user
+  before_action :authenticate_user
 
   def create
     results = MovieApi.new.search(params["data"]["zipcode"])

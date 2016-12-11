@@ -16,6 +16,7 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'jwt'
 gem 'rest-client'
 gem 'yelp', require: 'yelp'
+gem 'eventfulapi'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
@@ -23,7 +24,6 @@ gem 'yelp', require: 'yelp'
 gem 'rack-cors'
 
 gem 'httpclient'
-gem 'eventful_api'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
