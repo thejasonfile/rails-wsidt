@@ -22,10 +22,10 @@ class MovieApi
     results = callOnConnectAPI(zipcode)
     results = results[0..9]
     results.map do |result|
-      if !Movie.find_by({tmsId: result.tmsId})
-        Movie.create({tmsId: result.tmsId, title: result.title, description: result.shortDescription, genres: result.genres, showtimes: result.showtimes, image: result.preferredImage})
+      if !Movie.find_by({tmsId: result[:tmsId]})
+        Movie.create({tmsId: result[:tmsId], title: result[:title], description: result[:shortDescription], genres: result[:genres], showtimes: result[:showtimes], image_url: result[:preferredImage]})
       else
-        Movie.find_by({tmsId: result.tmsId})
+        Movie.find_by({tmsId: result[:tmsId]})
       end
     end
     #results.businesses.map do |result|

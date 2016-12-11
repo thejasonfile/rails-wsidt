@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161206215310) do
+ActiveRecord::Schema.define(version: 20161211163614) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,17 @@ ActiveRecord::Schema.define(version: 20161206215310) do
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
     t.index ["favoritable_type", "favoritable_id"], name: "index_favorites_on_favoritable_type_and_favoritable_id", using: :btree
+  end
+
+  create_table "movies", force: :cascade do |t|
+    t.integer  "tmsId"
+    t.string   "title"
+    t.text     "description"
+    t.text     "genres",      default: [],              array: true
+    t.text     "showtimes",   default: [],              array: true
+    t.string   "image_url"
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
   end
 
   create_table "restaurants", force: :cascade do |t|
