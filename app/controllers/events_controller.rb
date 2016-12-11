@@ -3,7 +3,7 @@ class EventsController < ApplicationController
 
   def create
     results = EventApi.search(params["data"]["zipcode"])
-    render json: {movie_info: results}
+    render json: {event_info: results}
   end
 
 end
