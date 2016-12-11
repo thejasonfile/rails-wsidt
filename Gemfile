@@ -23,6 +23,7 @@ gem 'yelp', require: 'yelp'
 gem 'rack-cors'
 
 gem 'httpclient'
+gem 'eventful_api'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
