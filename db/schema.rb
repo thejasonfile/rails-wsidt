@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(version: 20161211163614) do
   end
 
   create_table "movies", force: :cascade do |t|
-    t.integer  "tmsId"
+    t.string   "tmsId"
     t.string   "title"
     t.text     "description"
     t.text     "genres",      default: [],              array: true

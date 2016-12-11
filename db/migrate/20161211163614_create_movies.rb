@@ -1,7 +1,7 @@
 class CreateMovies < ActiveRecord::Migration[5.0]
   def change
     create_table :movies do |t|
-      t.integer :tmsId
+      t.string :tmsId
       t.string :title
       t.text :description
       t.text :genres, array: true, default: []
