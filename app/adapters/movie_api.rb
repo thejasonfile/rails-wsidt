@@ -23,7 +23,7 @@ class MovieApi
     results = results[0..9]
     results.map do |result|
       if !Movie.find_by({tmsId: result['tmsId']}) && !Movie.find_by({showtimes: result['[showtimes]']})
-        Movie.create({tmsId: result['tmsId'], title: result['title'], description: result['shortDescription'], genres: result['genres'], showtimes: result['showtimes'], image_url: result['preferredImage']})
+        Movie.create({tmsId: result['tmsId'], title: result['title'], description: result['shortDescription'], genres: result['genres'], showtimes: result['showtimes'], image_url: result['preferredImage']['uri']})
       else
         Movie.find_by({tmsId: result['tmsId']})
       end
