@@ -12,20 +12,20 @@ class ConcertApi
     baseUrl = "http://api.jambase.com/events?"
     date = Time.now
     today = date.to_s.split(" ")[0]
-    finalURL = baseUrl + "zipCode=" + zipcode.to_s + "&radius=50&startDate=" + today + "T16:00:00&endDate=" + today + "T23:59:00" + "&page=0&api_key=" + apikey
+    finalURL = baseUrl + "zipCode=" + zipcode + "&radius=50&startDate=" + today + "T16:00:00&endDate=" + today + "T23:59:00" + "&page=0&api_key=" + apikey
     content = clnt.get_content(finalURL)
-    byebug
     @concerts = JSON.parse(content)
     return @concerts
   end
 
   def search(zipcode)
     results = callJamBaseApi(zipcode)
-    results.map do |result|
-      if !Concert.find_by({concert_id: result['id']})
-        Concert.create({concert_id: result['id'], date: result['date'], venue: result['[venue]'], artist: result['artist[:name]'], url: result['ticket_url']})
+    results['Events'].map do |result|
+      byebug
+      if !Concert.find_by({concert_id: result['Id']})
+        Concert.create({concert_id: result['Id'], date: result['Date'], venue_name: result['Venue']['Name'], venue_address: result['Venue']['Address'], venue_city: result['Venue']['City'], artist: result['Artist']['Name'], url: result['TicketUrl']})
       else
-        Concert.find_by({concert_id: result['id']})
+        Concert.find_by({concert_id: result['Id']})
       end
     end
     #results.map do |result|

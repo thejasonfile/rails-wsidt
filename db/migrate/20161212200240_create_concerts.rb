@@ -3,7 +3,9 @@ class CreateConcerts < ActiveRecord::Migration[5.0]
     create_table :concerts do |t|
       t.string :concert_id
       t.datetime :start_time
-      t.text :venue, array: true, default: []
+      t.string :venue_name
+      t.string :venue_address
+      t.string :venue_city
       t.string :artist
       t.string :ticket_url
 

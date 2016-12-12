@@ -18,11 +18,13 @@ ActiveRecord::Schema.define(version: 20161212200240) do
   create_table "concerts", force: :cascade do |t|
     t.string   "concert_id"
     t.datetime "start_time"
-    t.text     "venue",      default: [],              array: true
+    t.string   "venue_name"
+    t.string   "venue_address"
+    t.string   "venue_city"
     t.string   "artist"
     t.string   "ticket_url"
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
   create_table "events", force: :cascade do |t|
