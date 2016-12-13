@@ -14,7 +14,7 @@ class EventApi
                           :date => 'today',
                           :within => 25,
                           :units => 'mi',
-                          :keywords => 'concert',
+                          :categories => 'comedy, plays, broadway, music, shows',
                           :page_size => 100
 
     return events
