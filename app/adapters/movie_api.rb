@@ -41,7 +41,6 @@ class MovieApi
   def search(zipcode)
     results = callOnConnectAPI(zipcode)
     results = results[0..9]
-    byebug
     results.map do |result|
       if !Movie.find_by({tmsId: result['tmsId']}) && !Movie.find_by({showtimes: result['[showtimes]']})
         movie_image = get_image(result['title'])
