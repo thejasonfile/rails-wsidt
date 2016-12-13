@@ -39,9 +39,9 @@ class MovieApi
   def search(zipcode)
     results = callOnConnectAPI(zipcode)
     results = results[0..9]
-    movie_poster_uri = getPosterImage(results['title'])
     results.map do |result|
       if !Movie.find_by({tmsId: result['tmsId']}) && !Movie.find_by({showtimes: result['[showtimes]']})
+        movie_poster_uri = getPosterImage(result['title'])
         Movie.create({tmsId: result['tmsId'], title: result['title'], description: result['shortDescription'], genres: result['genres'], showtimes: result['showtimes'], image_url: movie_poster_uri})
       else
         Movie.find_by({tmsId: result['tmsId']})
