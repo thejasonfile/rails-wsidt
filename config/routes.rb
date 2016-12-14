@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resources :restaurants
   resources :events
   resources :concerts
+  resources :bars
 
   post 'signin', to: 'sessions#create'
 
