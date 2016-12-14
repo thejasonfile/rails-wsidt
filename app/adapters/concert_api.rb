@@ -21,9 +21,9 @@ class ConcertApi
   def search(zipcode)
     results = callJamBaseApi(zipcode)
     results['Events'].map do |result|
-      byebug
       if !Concert.find_by({concert_id: result['Id']})
-        Concert.create({concert_id: result['Id'], date: result['Date'], venue_name: result['Venue']['Name'], venue_address: result['Venue']['Address'], venue_city: result['Venue']['City'], artist: result['Artist']['Name'], url: result['TicketUrl']})
+        artists = result['Artists'].map {|artist| artist["Name"]}.join(', ')
+        Concert.create({concert_id: result['Id'], start_time: result['Date'], venue_name: result['Venue']['Name'], venue_address: result['Venue']['Address'], venue_city: result['Venue']['City'], artist: artists, ticket_url: result['TicketUrl']})
       else
         Concert.find_by({concert_id: result['Id']})
       end
