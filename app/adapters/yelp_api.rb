@@ -13,7 +13,8 @@ class YelpApi
     results = client.search(zipcode, term)
     results.businesses.map do |result|
       if !Restaurant.find_by({yelp_id: result.id})
-        Restaurant.create({yelp_id: result.id, name: result.name, address: result.location.address.join(", "), city: result.location.city, zipcode: result.location.postal_code, phone: result.display_phone, url: result.url, rating:result.rating, rating_image: result.rating_img_url, categories: result.categories, image: result.image_url})
+        categories = result.categories.map {|category| category[0]}.join(', ')
+        Restaurant.create({yelp_id: result.id, name: result.name, address: result.location.address.join(", "), city: result.location.city, zipcode: result.location.postal_code, phone: result.display_phone, url: result.url, rating:result.rating, categories: categories, image: result.image_url})
       else
         Restaurant.find_by({yelp_id: result.id})
       end
