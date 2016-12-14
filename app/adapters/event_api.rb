@@ -23,13 +23,72 @@ class EventApi
   def self.search(zipcode)
     results = callEventApi(zipcode)
     results['events']['event'].map do |result|
+      start_date_time = stringify_time(result['start_time'])
       if !Event.find_by({event_id: result['id']}) && !Event.find_by({start_time: result['start_time']})
-        Event.create({event_id: result['id'], title: result['title'], description: result['description'], start_time: result['start_time'], url: result['url']})
+        Event.create({event_id: result['id'], title: result['title'], description: result['description'], start_time: start_date_time, url: result['url']})
       else
         Event.find_by({event_id: result['id']})
       end
     end
   end
 
+  def self.stringify_time(date_time)
+
+    date_time = date_time.to_s
+    if date_time.include? "T"
+      date = date_time.split("T").first
+      time = date_time.split("T").last
+    else
+      date = date_time.split(" ").first
+      time = date_time.split(" ")[1]
+    end
+
+    year = date.split("-").first
+    month = date.split("-")[1]
+    day = date.split("-").last
+    final_date = month + "-" + day + "-" + year
+
+    hour = time.split(":").first
+    am_pm = ""
+    if hour.to_i >= 12
+      am_pm = "p.m."
+    else
+      am_pm = "a.m."
+    end
+
+    if hour == "13"
+      hour = "1"
+    elsif hour == "14"
+      hour = "2"
+    elsif hour == "15"
+      hour = "3"
+    elsif hour == "16"
+      hour = "4"
+    elsif hour == "17"
+      hour = "5"
+    elsif hour == "18"
+      hour = "6"
+    elsif hour == "19"
+      hour = "7"
+    elsif hour == "20"
+      hour = "8"
+    elsif hour == "21"
+      hour = "9"
+    elsif hour == "22"
+      hour = "10"
+    elsif hour == "23"
+      hour = "11"
+    elsif hour == "24"
+      hour = "12"
+    end
+
+    minutes = time.split(":")[1]
+    final_time = hour + ":" + minutes + am_pm
+
+    final_date_time = final_time + " " + final_date
+
+    return final_date_time
+
+  end
 
 end

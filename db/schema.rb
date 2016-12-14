@@ -30,7 +30,7 @@ ActiveRecord::Schema.define(version: 20161214130113) do
 
   create_table "concerts", force: :cascade do |t|
     t.string   "concert_id"
-    t.datetime "start_time"
+    t.string   "start_time"
     t.string   "venue_name"
     t.string   "venue_address"
     t.string   "venue_city"
@@ -44,7 +44,7 @@ ActiveRecord::Schema.define(version: 20161214130113) do
     t.string   "event_id"
     t.string   "title"
     t.string   "description"
-    t.datetime "start_time"
+    t.string   "start_time"
     t.string   "url"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
