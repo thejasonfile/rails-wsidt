@@ -9,7 +9,7 @@ class StreamingMoviesApi
     clnt = HTTPClient.new(proxy)
 
     apikey = "zwpyk7ueg5vce93s98txstwp"
-    finalUrl = "https://api-public.guidebox.com/v1.43/all/rKODOSOrXK285VuQitRZe9bdmMnMBpVs/movies/all/1/100/amazon_prime"
+    finalUrl = "https://api-public.guidebox.com/v1.43/all/rKODOSOrXK285VuQitRZe9bdmMnMBpVs/movies/all/1/25/amazon_prime"
     content = clnt.get_content(finalURL)
     @streaming_movies = JSON.parse(content)
     return @streaming_movies
