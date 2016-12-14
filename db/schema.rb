@@ -24,8 +24,11 @@ ActiveRecord::Schema.define(version: 20161214130113) do
     t.string   "zipcode"
     t.string   "url"
     t.string   "phone"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "rating_image"
+    t.string   "image"
+    t.text     "categories",   default: [],              array: true
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
   end
 
   create_table "concerts", force: :cascade do |t|
@@ -81,8 +84,11 @@ ActiveRecord::Schema.define(version: 20161214130113) do
     t.string   "zipcode"
     t.string   "url"
     t.string   "phone"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "rating_image"
+    t.string   "image"
+    t.text     "categories",   default: [],              array: true
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
   end
 
   create_table "users", force: :cascade do |t|
