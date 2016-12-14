@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161214130113) do
+ActiveRecord::Schema.define(version: 20161214211417) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -89,6 +89,25 @@ ActiveRecord::Schema.define(version: 20161214130113) do
     t.text     "categories",   default: [],              array: true
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
+  end
+
+  create_table "streaming_movies", force: :cascade do |t|
+    t.string   "movie_id"
+    t.string   "title"
+    t.string   "release_date"
+    t.string   "rating"
+    t.string   "image"
+    t.string   "url"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  create_table "streaming_shows", force: :cascade do |t|
+    t.string "show_id"
+    t.string "title"
+    t.string "first_aired"
+    t.string "image"
+    t.string "url"
   end
 
   create_table "users", force: :cascade do |t|

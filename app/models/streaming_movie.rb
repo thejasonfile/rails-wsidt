@@ -1,0 +1,2 @@
+class StreamingMovie < ApplicationRecord
+end
