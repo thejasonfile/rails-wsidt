@@ -10,7 +10,7 @@ class StreamingMoviesApi
 
     apikey = "zwpyk7ueg5vce93s98txstwp"
     finalUrl = "https://api-public.guidebox.com/v1.43/all/rKODOSOrXK285VuQitRZe9bdmMnMBpVs/movies/all/1/25/amazon_prime"
-    content = clnt.get_content(finalURL)
+    content = clnt.get_content(finalUrl)
     @streaming_movies = JSON.parse(content)
     return @streaming_movies
   end
