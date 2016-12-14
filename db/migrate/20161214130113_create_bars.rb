@@ -9,7 +9,6 @@ class CreateBars < ActiveRecord::Migration[5.0]
       t.string :zipcode
       t.string :url
       t.string :phone
-      t.string :rating_image
       t.string :image
       t.text :categories, array: true, default: []
 

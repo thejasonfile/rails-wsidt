@@ -13,7 +13,7 @@ class BarApi
     results = client.search(zipcode, term)
     results.businesses.map do |result|
       if !Bar.find_by({yelp_id: result.id})
-        Bar.create({yelp_id: result.id, name: result.name, address: result.location.address.join(", "), city: result.location.city, zipcode: result.location.postal_code, phone: result.display_phone, url: result.url, rating:result.rating})
+        Bar.create({yelp_id: result.id, name: result.name, address: result.location.address.join(", "), city: result.location.city, zipcode: result.location.postal_code, phone: result.display_phone, url: result.url, rating:result.rating, image: result.image_url})
       else
         Bar.find_by({yelp_id: result.id})
       end
