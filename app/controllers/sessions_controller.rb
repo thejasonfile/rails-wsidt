@@ -6,6 +6,8 @@ class SessionsController < ApplicationController
       if user.authenticate(params[:user][:password])
         jwt = Auth.issue({user_id: user.id})
         render json: {jwt: jwt}
+      else
+        render json: {error: 'Please check username and password.'}
       end
   end
 end
