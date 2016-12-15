@@ -17,7 +17,7 @@ class StreamingMoviesApi
 
   def search
     results = callGuideBoxApi()
-    results['results'].map do |result|
+    results['results'][0..4].map do |result|
       if !StreamingMovie.find_by({movie_id: result['id']})
         StreamingMovie.create({movie_id: result['id'], title: result['original_title'], release_date: result['release_date'], rating: result['rating'], image: result['poster_240x342'], url: result['metacritic']})
       else
