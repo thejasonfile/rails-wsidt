@@ -3,11 +3,11 @@ class SessionsController < ApplicationController
 
   def create
       user = User.find_by(name: params[:user][:name])
-      if user.authenticate(params[:user][:password])
+      if user == nil
+        render json: {error: 'Please check username and password.'}
+      elsif user.authenticate(params[:user][:password])
         jwt = Auth.issue({user_id: user.id})
         render json: {jwt: jwt}
-      else
-        render json: {error: 'Please check username and password.'}
       end
   end
 end
