@@ -35,7 +35,6 @@ class OnConnectTVApi
     results = callOnConnectAPI(zipcode)
 
     #results.businesses.map do |result|
-    end
   end
 
 end
