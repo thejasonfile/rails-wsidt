@@ -27,7 +27,6 @@ class EventApi
     results = callEventApi(zipcode)
     results['events']['event'].map do |result|
       start_date_time = stringify_time(result['start_time'])
-<<<<<<< HEAD
       sanitized_description = ActionView::Base.full_sanitizer.sanitize(result['description'])
       if(sanitized_description != nil)
         sanitized_description.gsub("<br>", " ")
