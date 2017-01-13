@@ -4,8 +4,8 @@ class BarApi
     @client ||= Yelp::Client.new({
       consumer_key: 'rCPjCJMrMc2naKiFJG1OuQ',
       consumer_secret: '1vNPcyEIxqJPrtJwO4Xc5U59HNE',
-      token: 'SJmlEkBKLgtC6WMzsZAeWxQrMwUUIaKr',
-      token_secret: 'mmTFFzz8rlBGGn_dQvsqDHuOfcs'
+      token: 'Lo5IU4mxbJyJra2FfK9DURuhvU5NjKTf',
+      token_secret: 'ldhx6chbaEg9GTVL2Oi6ws6hFpM'
       })
   end
 
