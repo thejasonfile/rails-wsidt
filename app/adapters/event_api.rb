@@ -36,7 +36,7 @@ class EventApi
         sanitized_description[0].capitalize
       end
       puts sanitized_description
-      result['image'] != nil ? img_url = result['image']['medium']['url'] : img_url = "https://s28.postimg.org/gwri9yx1p/no_img.jpg"
+      result['image'] != nil ? img_url = result['image']['medium']['url'] : img_url = "https://s27.postimg.org/6t8znv3eb/no_image.jpg"
       if !Event.find_by({event_id: result['id']}) && !Event.find_by({start_time: result['start_time']})
         Event.create({event_id: result['id'], title: result['title'], description: sanitized_description, start_time: start_date_time, url: result['url'], image_url: img_url})
       else
