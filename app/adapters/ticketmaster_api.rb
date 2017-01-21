@@ -9,7 +9,7 @@ def TicketmasterAPI
     proxy = ENV['HTTP_PROXY']
     clnt = HTTPClient.new(proxy)
 
-    apikey = 'hj2uwyGTN5ZYMJtaullWKKCo0RtmISnt'
+    apikey = ENV['TICKETMASTER_KEY']
 
     startDate = Time.now
     startTime = startDate.to_s.split(" ")[0] + 'T18:30:00Z'
@@ -26,9 +26,6 @@ def TicketmasterAPI
 
   def getEvents(zipcode)
     results = callTicketmasterAPI(zipcode)
-
-    #results.businesses.map do |result|
-
   end
 
 end
