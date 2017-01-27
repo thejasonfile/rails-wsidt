@@ -25,22 +25,26 @@ class EventApi
 
   def self.search(zipcode)
     results = callEventApi(zipcode)
-    results['events']['event'].map do |result|
-      start_date_time = stringify_time(result['start_time'])
-      sanitized_description = ActionView::Base.full_sanitizer.sanitize(result['description'])
-      if(sanitized_description != nil)
-        sanitized_description.gsub("<br>", " ")
-        sanitized_description.gsub("&#39;s", "'")
-        sanitized_description.gsub("&amp", " ")
-        sanitized_description.gsub("&quot;", "'")
-        sanitized_description[0].capitalize
-      end
-      puts sanitized_description
-      result['image'] != nil ? img_url = result['image']['medium']['url'] : img_url = "https://s27.postimg.org/6t8znv3eb/no_image.jpg"
-      if !Event.find_by({event_id: result['id']}) && !Event.find_by({start_time: result['start_time']})
-        Event.create({event_id: result['id'], title: result['title'], description: sanitized_description, start_time: start_date_time, url: result['url'], image_url: img_url})
-      else
-        Event.find_by({event_id: result['id']})
+    if results['events'] == nil
+      return []
+    else
+      results['events']['event'].map do |result|
+        start_date_time = stringify_time(result['start_time'])
+        sanitized_description = ActionView::Base.full_sanitizer.sanitize(result['description'])
+        if(sanitized_description != nil)
+          sanitized_description.gsub("<br>", " ")
+          sanitized_description.gsub("&#39;s", "'")
+          sanitized_description.gsub("&amp", " ")
+          sanitized_description.gsub("&quot;", "'")
+          sanitized_description[0].capitalize
+        end
+        puts sanitized_description
+        result['image'] != nil ? img_url = result['image']['medium']['url'] : img_url = "https://s27.postimg.org/6t8znv3eb/no_image.jpg"
+        if !Event.find_by({event_id: result['id']}) && !Event.find_by({start_time: result['start_time']})
+          Event.create({event_id: result['id'], title: result['title'], description: sanitized_description, start_time: start_date_time, url: result['url'], image_url: img_url})
+        else
+          Event.find_by({event_id: result['id']})
+        end
       end
     end
   end
