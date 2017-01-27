@@ -5,9 +5,12 @@ require 'json'
 class EventApi
 
   def self.callEventApi(zipcode)
-    eventful = Eventful::API.new ENV["EVENTFUL_KEY"],
-                                :user => ENV["EVENTFUL_USER"],
-                                :password => ENV["EVENTFUL_PASSWORD"]
+    # eventful = Eventful::API.new ENV["EVENTFUL_KEY"],
+    #                             :user => ENV["EVENTFUL_USER"],
+    #                             :password => ENV["EVENTFUL_PASSWORD"]
+    eventful = Eventful::API.new 'cdQPghV7xKrjGxdk',
+                                :user => 'jake.zappin@gmail.com',
+                                :password => 'Flatiron0916'
 
     events = eventful.call 'events/search',
                           :location => zipcode,
