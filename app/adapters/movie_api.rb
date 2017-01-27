@@ -15,7 +15,7 @@ class MovieApi
     today = date.to_s.split(" ")[0]
     finalURL = baseUrl + "startDate=" + today + "&zip=" + zipcode.to_s + "&api_key=" + apikey;
     content = clnt.get_content(finalURL)
-    @movies = JSON.parse(content)
+    content.length == 0 ? @movies = [] : @movies = JSON.parse(content)
     return @movies
   end
 
