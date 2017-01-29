@@ -8,8 +8,7 @@ class ConcertApi
     proxy = ENV['HTTP_PROXY']
     clnt = HTTPClient.new(proxy)
 
-    # apikey = ENV['JAMBASE_KEY']
-    apikey = 'zwpyk7ueg5vce93s98txstwp'
+    apikey = ENV['JAMBASE_KEY']
     baseUrl = "http://api.jambase.com/events?"
     date = Time.now
     today = date.to_s.split(" ")[0]

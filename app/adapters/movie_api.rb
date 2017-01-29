@@ -8,8 +8,7 @@ class MovieApi
     proxy = ENV['HTTP_PROXY']
     clnt = HTTPClient.new(proxy)
 
-    # apikey = ENV["ONCONNECT_KEY"]
-    apikey = '2cbbqxx3664hv245va4sjjhm'
+    apikey = ENV["ONCONNECT_KEY"]
     baseUrl = "http://data.tmsapi.com/v1.1/movies/showings?"
     date = Time.now
     today = date.to_s.split(" ")[0]
